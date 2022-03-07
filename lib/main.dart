@@ -60,8 +60,10 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text(title), actions: [
-        IconButton(
+      appBar: AppBar(
+        title: Text(title),
+        actions: [
+          IconButton(
             icon: Icon(Icons.search),
             onPressed: () async {
               final selection =
@@ -69,8 +71,10 @@ class _HomeState extends State<Home> {
               if (selection != null && selection.isNotEmpty) {
                 setState(() => selectedTeam = selection);
               }
-            })
-      ]),
+            },
+          ),
+        ],
+      ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
