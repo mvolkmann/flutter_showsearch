@@ -36,7 +36,11 @@ const allTeams = [
   'Washington Capitals',
   'Winnipeg Jets',
 ];
-const suggestedTeams = <String>[];
+const suggestedTeams = <String>[
+  'Chicago Blackhawks',
+  'Edmonton Oilers',
+  'St. Louis Blues',
+];
 const title = 'My App';
 
 void main() => runApp(
@@ -70,7 +74,10 @@ class _HomeState extends State<Home> {
               );
               final selection =
                   await showSearch(context: context, delegate: delegate);
-              setState(() => selectedTeam = selection ?? '');
+              print('main.dart x: selection = $selection');
+              if (selection != null && selection.isNotEmpty) {
+                setState(() => selectedTeam = selection);
+              }
             })
       ]),
       body: Center(
@@ -84,7 +91,13 @@ class _HomeState extends State<Home> {
               child: ListView.builder(
                 itemCount: allTeams.length,
                 itemBuilder: (context, index) {
-                  return ListTile(title: Text(allTeams[index]));
+                  return ListTile(
+                    title: Text(allTeams[index]),
+                    onTap: () {
+                      print('main.dart onTap: entered');
+                      setState(() => selectedTeam = allTeams[index]);
+                    },
+                  );
                 },
               ),
             ).expanded,
