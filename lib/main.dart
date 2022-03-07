@@ -85,7 +85,6 @@ class _HomeState extends State<Home> {
                   return ListTile(
                     title: Text(teams[index]),
                     onTap: () {
-                      print('main.dart onTap: entered');
                       setState(() => selectedTeam = teams[index]);
                     },
                   );
