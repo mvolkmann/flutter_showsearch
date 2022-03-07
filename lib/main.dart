@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import './extensions/widget_extensions.dart';
+import './team_search_delegate.dart';
 
-const title = 'My App';
-const teams = [
+const allTeams = [
   'Anaheim Ducks',
   'Arizona Coyotes',
   'Boston Bruins',
@@ -36,6 +36,8 @@ const teams = [
   'Washington Capitals',
   'Winnipeg Jets',
 ];
+const suggestedTeams = <String>[];
+const title = 'My App';
 
 void main() => runApp(
       MaterialApp(
@@ -58,17 +60,31 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text(title)),
+      appBar: AppBar(title: Text(title), actions: [
+        IconButton(
+            icon: Icon(Icons.search),
+            onPressed: () async {
+              final delegate = TeamSeachDelegate(
+                allTeams: allTeams,
+                suggestedTeams: suggestedTeams,
+              );
+              final selection =
+                  await showSearch(context: context, delegate: delegate);
+              setState(() => selectedTeam = selection ?? '');
+            })
+      ]),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Text('You selected $selectedTeam.'),
+            Text(selectedTeam.isEmpty
+                ? 'Select a team.'
+                : 'You selected $selectedTeam.'),
             Scrollbar(
               child: ListView.builder(
-                itemCount: teams.length,
+                itemCount: allTeams.length,
                 itemBuilder: (context, index) {
-                  return ListTile(title: Text(teams[index]));
+                  return ListTile(title: Text(allTeams[index]));
                 },
               ),
             ).expanded,
