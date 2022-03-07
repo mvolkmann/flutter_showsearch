@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import './extensions/widget_extensions.dart';
 import './team_search_delegate.dart';
 
-const allTeams = [
+const teams = [
   'Anaheim Ducks',
   'Arizona Coyotes',
   'Boston Bruins',
@@ -36,11 +36,6 @@ const allTeams = [
   'Washington Capitals',
   'Winnipeg Jets',
 ];
-const suggestedTeams = <String>[
-  'Chicago Blackhawks',
-  'Edmonton Oilers',
-  'St. Louis Blues',
-];
 const title = 'My App';
 
 void main() => runApp(
@@ -68,10 +63,7 @@ class _HomeState extends State<Home> {
         IconButton(
             icon: Icon(Icons.search),
             onPressed: () async {
-              final delegate = TeamSeachDelegate(
-                allTeams: allTeams,
-                suggestedTeams: suggestedTeams,
-              );
+              final delegate = TeamSeachDelegate(teams: teams);
               final selection =
                   await showSearch(context: context, delegate: delegate);
               print('main.dart x: selection = $selection');
@@ -89,13 +81,13 @@ class _HomeState extends State<Home> {
                 : 'You selected $selectedTeam.'),
             Scrollbar(
               child: ListView.builder(
-                itemCount: allTeams.length,
+                itemCount: teams.length,
                 itemBuilder: (context, index) {
                   return ListTile(
-                    title: Text(allTeams[index]),
+                    title: Text(teams[index]),
                     onTap: () {
                       print('main.dart onTap: entered');
-                      setState(() => selectedTeam = allTeams[index]);
+                      setState(() => selectedTeam = teams[index]);
                     },
                   );
                 },

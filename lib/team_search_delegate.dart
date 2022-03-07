@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 
 class TeamSeachDelegate extends SearchDelegate<String> {
-  final List<String> allTeams;
-  final List<String> suggestedTeams;
+  final List<String> teams;
 
-  TeamSeachDelegate({required this.allTeams, required this.suggestedTeams});
+  TeamSeachDelegate({required this.teams});
 
   @override
   List<Widget>? buildActions(BuildContext context) {
@@ -20,18 +19,18 @@ class TeamSeachDelegate extends SearchDelegate<String> {
   Widget? buildLeading(BuildContext context) {
     return IconButton(
       icon: Icon(Icons.arrow_back),
-      onPressed: () => close(context, query),
+      onPressed: () => close(context, ''),
     );
   }
 
   @override
   Widget buildResults(BuildContext context) {
-    return _buildListView(allTeams);
+    return _buildListView(teams);
   }
 
   @override
   Widget buildSuggestions(BuildContext context) {
-    return _buildListView(suggestedTeams);
+    return _buildListView(teams);
   }
 
   Widget _buildListView(List<String> teams) {
