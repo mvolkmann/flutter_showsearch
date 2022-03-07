@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-class TeamSeachDelegate extends SearchDelegate<String> {
+class TeamSearchDelegate extends SearchDelegate<String> {
   final List<String> teams;
 
-  TeamSeachDelegate({required this.teams});
+  TeamSearchDelegate({required this.teams});
 
   @override
   List<Widget>? buildActions(BuildContext context) {

@@ -54,6 +54,7 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  final delegate = TeamSearchDelegate(teams: teams);
   var selectedTeam = '';
 
   @override
@@ -63,10 +64,8 @@ class _HomeState extends State<Home> {
         IconButton(
             icon: Icon(Icons.search),
             onPressed: () async {
-              final delegate = TeamSeachDelegate(teams: teams);
               final selection =
                   await showSearch(context: context, delegate: delegate);
-              print('main.dart x: selection = $selection');
               if (selection != null && selection.isNotEmpty) {
                 setState(() => selectedTeam = selection);
               }
